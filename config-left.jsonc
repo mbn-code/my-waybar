@@ -1,0 +1,19 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["sway/workspaces", "custom/git_branch"],
+  "modules-center": [],
+  "modules-right": ["clock"],
+
+  "clock": {
+    "format": "{:%a %b %d %H:%M:%S}",
+    "tooltip-format": "{:%A, %B %d, %Y}"
+  },
+
+  "custom/git_branch": {
+    "exec": "~/.config/waybar/scripts/git_branch.sh",
+    "interval": 5,
+    "format": "{}",
+    "return-type": "json"
+  }
+}

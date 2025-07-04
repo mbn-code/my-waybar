@@ -1,0 +1,35 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["cpu", "memory"],
+  "modules-center": [],
+  "modules-right": ["battery", "network", "pulseaudio"],
+
+  "cpu": {
+    "format": "CPU: {usage}%",
+    "tooltip": true,
+    "max": 100
+  },
+
+  "memory": {
+    "format": "RAM: {used}/{total} GB",
+    "tooltip": true
+  },
+
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ⚡",
+    "tooltip": true,
+    "low-capacity": 15,
+    "critical-capacity": 5
+  },
+
+  "network": {
+    "format": "{ifname}: {ipaddr}",
+    "tooltip": true
+  },
+
+  "pulseaudio": {
+    "format": "{volume}% {muted}"
+  }
+}
