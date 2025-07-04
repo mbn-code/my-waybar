@@ -1,68 +1,48 @@
 * {
   font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
-  background: rgba(30, 30, 40, 0.35);
-  color: #c0caf5;
-  padding: 6px 14px;
-  border-radius: 14px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  /* Remove these lines because unsupported by Waybar: */
-  /* backdrop-filter: blur(12px); */
-  /* -webkit-backdrop-filter: blur(12px); */
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 13px;
+  color: #e0e0e0;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
 }
 
-#sway-workspaces {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 10px;
-  padding: 4px 10px;
-  margin-right: 12px;
-  font-weight: 600;
-  color: #7aa2f7;
-  letter-spacing: 0.02em;
+window#waybar {
+  background: rgba(20, 20, 30, 0.4);
+  border-radius: 20px;
+  padding: 6px 12px;
+  margin: 0px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* ✨ subtle white outline */
 }
 
-#sway-workspaces .focused {
-  background: rgba(122, 162, 247, 0.8);
-  color: #1a1b26;
-  border-radius: 8px;
-  padding: 0 8px;
-  font-weight: 700;
+#workspaces {
+  background: transparent;
+  margin-right: 10px;
 }
 
-#clock {
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: #89b4fa;
+#workspaces button {
+  background: transparent;
+  border-radius: 12px;
+  margin: 0 4px;
+  padding: 4px 8px;
+  color: #a6adc8;
+  border: 1px solid rgba(255, 255, 255, 0.08); /* added border */
 }
 
-#cpu {
-  color: #f7768e;
-  font-weight: 600;
+#workspaces button.active {
+  background: rgba(122, 162, 247, 0.15);
+  color: white;
+  border: 1px solid rgba(122, 162, 247, 0.3); /* highlight active */
 }
 
-#memory {
-  color: #9ece6a;
-  font-weight: 600;
-}
-
-#battery {
-  color: #ff9e64;
-  font-weight: 600;
-}
-
-#network {
-  color: #7dcfff;
-  font-weight: 600;
-}
-
+#clock,
+#battery,
+#network,
 #pulseaudio {
-  color: #bb9af7;
-  font-weight: 600;
-}
-
-#custom-git_branch {
-  color: #e0af68;
-  margin-left: 12px;
-  font-weight: 600;
+  padding: 0 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 0 5px;
+  border: 1px solid rgba(255, 255, 255, 0.08); /* ✨ clean outline */
 }

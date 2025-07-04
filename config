@@ -1,48 +1,31 @@
 {
   "layer": "top",
   "position": "top",
-  "modules-left": ["sway/workspaces", "custom/git_branch"],
+  "margin-top": 10,
+  "margin-left": 20,
+  "margin-right": 20,
+  "modules-left": ["hyprland/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["cpu", "memory", "battery", "network", "pulseaudio"],
+  "modules-right": ["pulseaudio", "network", "battery"],
 
   "clock": {
-    "format": "{:%a %b %d %H:%M:%S}",
+    "format": "{:%a %d %b  %H:%M}",
     "tooltip-format": "{:%A, %B %d, %Y}"
-  },
-
-  "cpu": {
-    "format": "CPU: {usage}%",
-    "format-alt": "CPU: {usage}%",
-    "tooltip": true,
-    "max": 100
-  },
-
-  "memory": {
-    "format": "RAM: {used}/{total} GB",
-    "tooltip": true
   },
 
   "battery": {
     "format": "{capacity}% {icon}",
-    "format-charging": "{capacity}% ⚡",
-    "tooltip": true,
-    "low-capacity": 15,
-    "critical-capacity": 5
+    "format-charging": "{capacity}% ⚡"
   },
 
   "network": {
-    "format": "{ifname}: {ipaddr}",
-    "tooltip": true
+    "format-wifi": "📶 {signalStrength}%",
+    "format-ethernet": "🖧 {ipaddr}",
+    "format-disconnected": "⚠ Disconnected"
   },
 
   "pulseaudio": {
-    "format": "{volume}% {muted}"
-  },
-
-  "custom/git_branch": {
-    "exec": "~/.config/waybar/scripts/git_branch.sh",
-    "interval": 5,
-    "format": "{}",
-    "return-type": "json"
+    "format": "🔊 {volume}%",
+    "scroll-step": 5
   }
 }
