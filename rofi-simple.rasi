@@ -1,0 +1,74 @@
+* {
+    font: "JetBrains Mono 13";
+    background-color: transparent;
+    text-color: #e0e0e0;
+}
+
+window {
+    location: center;
+    width: 400px;
+    background-color: #1a1a1e;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 16px;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [inputbar, listview];
+    spacing: 12px;
+}
+
+inputbar {
+    background-color: #2a2a2e;
+    border: 1px solid #444;
+    border-radius: 14px;
+    padding: 12px 16px;
+    text-color: #ffffff;
+    children: [prompt, entry];
+    spacing: 8px;
+}
+
+prompt {
+    background-color: transparent;
+    text-color: #7aa2f7;
+}
+
+entry {
+    background-color: transparent;
+    text-color: #ffffff;
+    cursor: text;
+}
+
+listview {
+    background-color: transparent;
+    border: none;
+    lines: 8;
+    scrollbar: false;
+    spacing: 4px;
+    padding: 8px 0px;
+}
+
+element {
+    background-color: transparent;
+    text-color: #a6adc8;
+    border-radius: 12px;
+    padding: 10px 14px;
+    border: 1px solid transparent;
+}
+
+element selected {
+    background-color: #333;
+    text-color: #ffffff;
+    border: 1px solid #555;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+}
+
+element-icon {
+    background-color: transparent;
+    size: 20px;
+}
