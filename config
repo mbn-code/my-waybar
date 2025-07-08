@@ -1,81 +1,235 @@
 {
   "layer": "top",
   "position": "top",
-  "margin-top": 10,
-  "margin-left": 20,
-  "margin-right": 20,
-  "modules-left": ["hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["clock"],
-  "modules-right": ["mpris", "cpu", "memory", "custom/weather", "tray", "bluetooth", "pulseaudio", "network", "battery"],
+  "margin-top": 8,
+  "margin-left": 16,
+  "margin-right": 16,
+  "spacing": 0,
+  "reload_style_on_change": true,
+  "modules-left": ["hyprland/workspaces", "hyprland/window", "custom/git", "custom/separator-left"],
+  "modules-center": ["clock", "custom/weather", "custom/system-uptime"],
+  "modules-right": ["custom/separator-right", "custom/system-stats", "mpris", "tray", "bluetooth", "pulseaudio", "network", "battery", "idle_inhibitor", "custom/notifications", "custom/power-menu"],
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "󰈹",
+      "2": "󰈮",
+      "3": "󰘔",
+      "4": "󰎄",
+      "5": "󰋩",
+      "6": "󰒱",
+      "7": "󰊗",
+      "8": "󰎇",
+      "9": "󰊖",
+      "10": "󰿬",
+      "active": "󰮯",
+      "default": "󰧞"
+    },
+    "persistent-workspaces": {
+      "*": 5
+    },
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "tooltip": true,
+    "tooltip-format": "Workspace {name}"
+  },
 
   "hyprland/window": {
-    "format": "{class} - {title}",
+    "format": "󰣆 {class}",
+    "format-alt": "󰣆 {title}",
     "separate-outputs": true,
-    "max-length": 40,
+    "max-length": 50,
     "tooltip": true,
-    "tooltip-format": "{class}: {title}"
+    "tooltip-format": "{class}: {title}",
+    "on-click": "hyprctl dispatch togglefloating",
+    "on-click-right": "hyprctl dispatch fullscreen"
+  },
+
+  "custom/git": {
+    "format": "{}",
+    "exec": "/home/mbn/.config/waybar/scripts/git_branch.sh",
+    "interval": 5,
+    "return-type": "json",
+    "tooltip": true,
+    "tooltip-format": "Current git branch",
+    "on-click": "code ."
   },
 
   "clock": {
-    "format": "{:%a %d %b  %H:%M}",
-    "tooltip-format": "{:%A, %B %d, %Y}"
+    "format": "󰥔 {:%H:%M}",
+    "format-alt": "󰸗 {:%A, %B %d, %Y - %H:%M:%S}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "on-click": "gnome-calendar",
+    "on-click-right": "gnome-clocks",
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  "custom/weather": {
+    "format": "{}",
+    "exec": "/home/mbn/.config/waybar/scripts/weather.sh",
+    "interval": 1800,
+    "return-type": "json",
+    "tooltip": true,
+    "on-click": "xdg-open https://wttr.in"
+  },
+
+  "custom/system-stats": {
+    "format": "{}",
+    "exec": "/home/mbn/.config/waybar/scripts/system_stats.sh",
+    "interval": 3,
+    "return-type": "json",
+    "tooltip": true
   },
 
   "mpris": {
     "format": "{player_icon} {dynamic}",
     "format-paused": "{status_icon} <i>{dynamic}</i>",
     "player-icons": {
-      "default": "🎵"
+      "default": "󰝚",
+      "spotify": "󰓇",
+      "vlc": "󰕼",
+      "chrome": "󰊯"
     },
     "status-icons": {
-      "paused": "⏸",
-      "playing": "▶"
+      "paused": "󰏤",
+      "playing": "󰐊",
+      "stopped": "󰓛"
     },
-    "max-length": 30
-  },
-
-  "cpu": {
-    "format": "󰍛 {usage}%",
-    "interval": 2,
-    "tooltip": false
-  },
-
-  "memory": {
-    "format": "󰘚 {percentage}%",
-    "tooltip-format": "Memory: {used:0.1f}G/{total:0.1f}G"
-  },
-
-  "custom/weather": {
-    "format": "{}",
-    "exec": "curl -s 'wttr.in/?format=1' | head -1",
-    "interval": 3600,
-    "tooltip": false
+    "max-length": 35,
+    "tooltip": true,
+    "tooltip-format": "{artist} - {title}",
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-scroll-up": "playerctl previous",
+    "on-scroll-down": "playerctl next"
   },
 
   "tray": {
-    "icon-size": 16,
-    "spacing": 10
+    "icon-size": 18,
+    "spacing": 8,
+    "show-passive-items": true
+  },
+
+  "custom/power-menu": {
+    "format": "�",
+    "tooltip": true,
+    "tooltip-format": "Power Menu",
+    "on-click": "/home/mbn/.config/waybar/scripts/power_menu.sh"
   },
 
   "bluetooth": {
-    "format": " {status}",
-    "format-connected": " {device_alias}",
-    "on-click": "blueman-manager"
-  },
-
-  "battery": {
-    "format": "{capacity}% {icon}",
-    "format-charging": "{capacity}% ⚡"
-  },
-
-  "network": {
-    "format-wifi": "📶 {signalStrength}%",
-    "format-ethernet": "🖧 {ipaddr}",
-    "format-disconnected": "⚠ Disconnected"
+    "format": "󰂯",
+    "format-disabled": "󰂲",
+    "format-off": "󰂲",
+    "format-on": "󰂯",
+    "format-connected": "󰂱 {device_alias}",
+    "format-connected-battery": "󰂱 {device_alias} ({device_battery_percentage}%)",
+    "tooltip": true,
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "blueman-manager",
+    "on-click-right": "rfkill toggle bluetooth"
   },
 
   "pulseaudio": {
-    "format": "🔊 {volume}%",
-    "scroll-step": 5
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "󰂰 {volume}%",
+    "format-bluetooth-muted": "󰂲 Muted",
+    "format-muted": "󰖁 Muted",
+    "format-source": "󰍬 {volume}%",
+    "format-source-muted": "󰍭 Muted",
+    "format-icons": {
+      "headphone": "󰋋",
+      "hands-free": "󰋎",
+      "headset": "󰋎",
+      "phone": "󰄜",
+      "portable": "󰄜",
+      "car": "󰄋",
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "scroll-step": 5,
+    "tooltip": true,
+    "tooltip-format": "{desc}",
+    "on-click": "pavucontrol",
+    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+  },
+
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": "󰖩 {essid}",
+    "format-ethernet": "󰈀 Connected",
+    "format-disconnected": "󰖪 Disconnected",
+    "tooltip": true,
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "tooltip-format-wifi": "󰖩 {essid} ({signalStrength}%)\n󰩟 {frequency}MHz\n󰩠 {ipaddr}/{cidr}\n󰞉 {gwaddr}",
+    "tooltip-format-ethernet": "󰈀 {ifname}\n󰩠 {ipaddr}/{cidr}\n󰞉 {gwaddr}",
+    "tooltip-format-disconnected": "󰖪 Disconnected",
+    "max-length": 25,
+    "on-click": "nm-connection-editor",
+    "on-click-right": "nmcli device wifi rescan"
+  },
+
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰂄 {capacity}%",
+    "format-full": "󰁹 {capacity}%",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip": true,
+    "tooltip-format": "{timeTo}\nPower: {power}W",
+    "on-click": "gnome-power-statistics"
+  },
+
+  "custom/separator-left": {
+    "format": "",
+    "tooltip": false
+  },
+
+  "custom/separator-right": {
+    "format": "",
+    "tooltip": false
+  },
+
+  "custom/system-uptime": {
+    "format": "{}",
+    "exec": "/home/mbn/.config/waybar/scripts/uptime.sh",
+    "interval": 60,
+    "return-type": "json",
+    "tooltip": true
+  },
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾪"
+    },
+    "tooltip": true,
+    "tooltip-format-activated": "Idle inhibitor: ON\nSystem will not sleep",
+    "tooltip-format-deactivated": "Idle inhibitor: OFF\nSystem may sleep when idle"
+  },
+
+  "custom/notifications": {
+    "format": "󰂚",
+    "tooltip": true,
+    "tooltip-format": "Notification Center",
+    "on-click": "swaync-client -t -sw"
   }
 }
